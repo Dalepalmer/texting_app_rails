@@ -1,4 +1,3 @@
-require 'twilio-ruby'
 class Message < ActiveRecord::Base
   before_create :send_message
   validates :to, presence: true
@@ -12,16 +11,16 @@ class Message < ActiveRecord::Base
 
   def send_message
     begin
-      account_sid = ENV['TWILIO_ACCOUNT_SID']
-      auth_token = ENV['TWILIO_AUTH_TOKEN']
-      @client = Twilio::REST::Client.new account_sid, auth_token
-      message = @client.account.messages.create(:body => self.body,
-      :to => self.to,
-      :from => "+14158141829")
-      puts message.to
-    rescue Twilio::REST::RequestError => error
-      binding.pry
-      message = JSON.parse(error.to_json)['message']
+      response = RestClient::Request.new(
+        :method => :post,
+        :url => "https://api.twilio.com/2010-04-01/Accounts/#{ENV['TWILIO_ACCOUNT_SID']}/Messages.json",
+        :user => ENV['TWILIO_ACCOUNT_SID'],
+        :password => ENV['TWILIO_AUTH_TOKEN'],
+        :payload => { :Body => body,
+                      :To => to }
+      ).execute
+    rescue RestClient::BadRequest => error
+      message = JSON.parse(error.response)['message']
       errors.add(:base, message)
       false
     end

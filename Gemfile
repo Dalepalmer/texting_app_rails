@@ -10,8 +10,7 @@ gem 'turbolinks'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'bootswatch-rails'
-gem 'twilio-ruby'
-
+gem 'rest-client'
 
 group :development do
   gem 'byebug'
