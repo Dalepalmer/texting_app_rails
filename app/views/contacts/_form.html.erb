@@ -1,0 +1,7 @@
+<%= form_for [@user, @contact] do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+<%= f.label :number %>
+<%= f.phone_field :number %>
+<%= f.submit %>
+<% end %>
