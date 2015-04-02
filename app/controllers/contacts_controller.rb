@@ -1,11 +1,11 @@
 class ContactsController < ApplicationController
 
   def index
-
+    @user = current_user
+    @contacts = current_user.contacts
   end
 
   def show
-    @contact = Contact.find([:id])
   end
 
   def new
