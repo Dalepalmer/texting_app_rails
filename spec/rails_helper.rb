@@ -55,4 +55,5 @@ end
   c.configure_rspec_metadata!
   c.filter_sensitive_data('<twilio account sid>') { ENV['TWILIO_ACCOUNT_SID'] }
   c.filter_sensitive_data('<twilio auth token>') { ENV['TWILIO_AUTH_TOKEN'] }
+  c.ignore_localhost = true
 end

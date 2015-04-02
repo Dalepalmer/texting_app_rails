@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
 
   root to: "home#index"
-  resources :message
+  resources :messages
 
   resources :users, only: [:show] do
     resources :contacts

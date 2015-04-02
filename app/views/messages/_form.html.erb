@@ -1,0 +1,7 @@
+<%= form_for @message do |f| %>
+<%= f.label :to %>
+<%= f.collection_radio_buttons :to, Contact.all, :id, :name, :prompt => "Select your username" %><br />
+<%= f.label :body %>
+<%= f.text_field :body %>
+<%= f.submit %>
+<% end %>
